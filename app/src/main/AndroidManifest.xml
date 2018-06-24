@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.think.ijkplayer">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--
+2. android:configChanges="orientation|keyboardHidden|screenSize"的使用
+当在activity加上android:configChanges="keyboardHidden|orientation|screenSize"属性,就不会重启activity.
+而只是调用onConfigurationChanged(Configuration newConfig).这样就可以在这个方法里调整显示方式.
+在xml文件里面可以进行配置configChanges也可以在代码中动态配置
+注意4.0以上版本：
+1、不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次
+2、设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次
+3、设置Activity的android:configChanges="orientation|keyboardHidden|screenSize|screenSize"时，切屏不会重新调用各个生命周期，
+只会执行onConfigurationChanged方法
+        -->
+        <!--
+        android:screenOrientation="sensorLandscape"
+        横向显示，但是基于设备传感器，既可以是按正常方向显示，也可以反向显示，在API Level 9中被引入。
+        -->
+        <activity
+            android:name=".PlayerManagerActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".PlayerStateActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+    </application>
+
+</manifest>
